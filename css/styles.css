@@ -57,7 +57,7 @@ body {
   font-style: normal;
 }
 .tags {
-  font-size: 10px;
+  font-size: 0.6em;
 }
 .tags:before {
   content: " | ";
@@ -86,7 +86,7 @@ body {
   outline: none;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 550px) {
   .quote {
     font-size: 2.5rem;
   }
