@@ -28,7 +28,7 @@ function randomRGBColor(max){
 function getRandomQuote(){
   //in case we have run out of quotes, get a new batch of quotes from the 'datebase'
   if (quotesCopy.length <= 0){ quotesCopy = quotesCopy.concat(quotes); }
-  //returns quote while removeing it from the array
+  //returns a random quote while removeing it from the quotesCopy array
   return quotesCopy.splice(randomNumber(quotesCopy.length), 1)[0];
 }
 
@@ -37,18 +37,19 @@ var printQuote = function() {
   var rnQuote = getRandomQuote();
 
   //Start of the HTMl that goes in the source paragraf
-  var sourceHTML = rnQuote.source;
+  var sourceHTML = "- ";
 
-  //We tjek if we have a citation
-  if (rnQuote.hasOwnProperty("citation")) { sourceHTML += '<span class="citation">' + rnQuote.citation +'</span>'; }
-  //We tjek if we have a year date
-  if (rnQuote.hasOwnProperty("year")) { sourceHTML += '<span class="year">' + rnQuote.year +'</span>'; }
-  //We tjek for potential tags
-  if (rnQuote.hasOwnProperty("tags")) { sourceHTML += '<span class="tags">' + rnQuote.tags +'</span>'; }
+  //Add the relevant tags to the sourceHTML
+  for (var attributes in rnQuote) {
+    if (rnQuote.hasOwnProperty(attributes) && attributes != "quote") {
+      sourceHTML += '<span class="' + attributes + '">' + rnQuote[attributes] +'</span>';
+    }
+  }
 
   //We add alle the html to the quote and source
   quoteDisplay[0].innerHTML = rnQuote.quote;
   sourceDisplay[0].innerHTML = sourceHTML;
+
   //Change the background color, but at a max rgb value of 200 so we dont get a white page, and cant see the quote
   document.body.style.backgroundColor = randomRGBColor(200);
 
@@ -56,6 +57,6 @@ var printQuote = function() {
   setTimer();
 };
 
-//Here we add eventlisteners and set the timer
+//Here we add eventlisteners and start the timer
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 setTimer()
