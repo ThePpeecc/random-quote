@@ -85,7 +85,7 @@ body {
   outline: none;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 800px) {
   .quote {
     font-size: 2.5rem;
   }
