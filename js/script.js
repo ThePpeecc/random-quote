@@ -2,8 +2,7 @@
 var quoteDisplay = document.getElementsByClassName("quote");
 var sourceDisplay = document.getElementsByClassName("source");
 
-//We want to change the quote every 30 seconds
-let timerLength = 30000;
+//The vaiable to hold the timer
 var timer;
 
 //This variable holds a copy of all the quotes from the 'database'
@@ -14,10 +13,10 @@ function randomNumber(maxIndex){
   return Math.floor(Math.random()*maxIndex);
 }
 
-function setTimer() {
+function setTimer(timeLength) {
   //We clear the timer incase the user pushed the button and set a new timer
   clearTimeout(timer);
-  timer = setTimeout(printQuote, timerLength);
+  timer = setTimeout(printQuote, timeLength);
 }
 
 function randomRGBColor(max){
@@ -54,9 +53,9 @@ var printQuote = function() {
   document.body.style.backgroundColor = randomRGBColor(200);
 
   //We set a new timer since the last one has stopped running now
-  setTimer();
+  setTimer(30000);
 };
 
-//Here we add eventlisteners and start the timer
+//Here we add eventlisteners and start the timer with 30 seconds
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-setTimer()
+setTimer(30000);
